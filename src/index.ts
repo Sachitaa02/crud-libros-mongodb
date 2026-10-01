@@ -1,6 +1,7 @@
 import { closeDatabase, connectToDatabase } from "./database";
 import { createBook } from "./commands/createBook";
 import { readBooks } from "./commands/readBooks";
+import { updateBook } from "./commands/updateBook";
 
 
 async function main(): Promise<void> {
@@ -30,6 +31,25 @@ async function main(): Promise<void> {
         
         case "read": {
           await readBooks(librosCollection);
+          break;
+        }
+        
+        case "update": {
+          const id = argumentos[1];
+          const titulo = argumentos[2];
+          const autor = argumentos[3];
+          const precio = Number(argumentos[4]);
+          const stock = Number(argumentos[5]);
+
+          await updateBook(
+            librosCollection,
+            id,
+            titulo,
+            autor,
+            precio,
+            stock
+          );
+
           break;
         }
 
