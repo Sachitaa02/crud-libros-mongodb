@@ -2,6 +2,7 @@ import { closeDatabase, connectToDatabase } from "./database";
 import { createBook } from "./commands/createBook";
 import { readBooks } from "./commands/readBooks";
 import { updateBook } from "./commands/updateBook";
+import { deleteBook } from "./commands/deleteBook";
 
 
 async function main(): Promise<void> {
@@ -49,6 +50,14 @@ async function main(): Promise<void> {
             precio,
             stock
           );
+
+          break;
+        }
+        
+        case "delete": {
+          const id = argumentos[1];
+
+          await deleteBook(librosCollection, id);
 
           break;
         }
