@@ -1,4 +1,5 @@
-import { Collection, Db, Document, MongoClient } from "mongodb";
+import { Collection, Db, MongoClient } from "mongodb";
+import { Libro } from "./models/Libro";
 
 const MONGO_URI = "mongodb://127.0.0.1:27017";
 const DATABASE_NAME = "biblioteca";
@@ -8,7 +9,7 @@ const client = new MongoClient(MONGO_URI);
 
 export async function connectToDatabase(): Promise<{
   db: Db;
-  librosCollection: Collection<Document>;
+  librosCollection: Collection<Libro>;
 }> {
   await client.connect();
 
@@ -16,7 +17,7 @@ export async function connectToDatabase(): Promise<{
 
   await db.command({ ping: 1 });
 
-  const librosCollection = db.collection(COLLECTION_NAME);
+  const librosCollection = db.collection<Libro>(COLLECTION_NAME);
 
   return {
     db,
