@@ -1,5 +1,6 @@
 import { closeDatabase, connectToDatabase } from "./database";
 import { createBook } from "./commands/createBook";
+import { readBooks } from "./commands/readBooks";
 
 
 async function main(): Promise<void> {
@@ -26,6 +27,11 @@ async function main(): Promise<void> {
 
         break;
       }
+        
+        case "read": {
+          await readBooks(librosCollection);
+          break;
+        }
 
       default:
         console.log("Comando no reconocido.");
